@@ -9,3 +9,4 @@ shutil
 glob
 cv2
 albumentations
+timm
