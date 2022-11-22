@@ -118,6 +118,55 @@ class VOCSegmentationPseuMask(VOC):
             return {'img': img, 'target': target, 'name': img_name}
 
 
+@DATASETS_REG.register_module('voc_test')
+class VOCTest(torch.utils.data.Dataset):
+    num_classes = 21
+    def __init__(
+        self,
+        root: str,
+        mode: str='train',
+        transform: Callable=None,
+        **kwargs
+    ):
+        self.root = root
+        self.mode = mode
+        self.transform = transform
+
+        if mode == 'train':
+            self.transform = None
+
+        if mode == 'test':
+            self.root = root + '_test'
+
+        splits_dir = os.path.join(self.root, 'ImageSets/Segmentation')
+        assert os.path.isdir(self.root), \
+            f'Dataset not found at location {self.root}'
+        self.img_dir = os.path.join(self.root, 'JPEGImages')
+        split_f = os.path.join(splits_dir, self.mode.rstrip('\n') + '.txt')
+        assert os.path.exists(split_f), f"split file not found"
+        self.file_names = np.loadtxt(split_f, dtype=np.str_)       
+
+    def __getitem__(self, index):
+        img_name = self.file_names[index]
+        img_path = os.path.join(self.img_dir, img_name + '.jpg')
+        img = Image.open(img_path).convert('RGB')
+        label = Image.new(mode="RGB", size=(512, 512))
+
+        if self.transform is not None:
+            data = {'img': img, 'label': label}
+            data = self.transform(data)
+            img, label = data['img'], data['label']
+
+        return {'img': img, 'target': label, 'name': img_name}
+
+    def __len__(self):
+        return len(self.file_names)
+
+    def get_info(self):
+        msg = f"The number of all {self.mode} images: {self.__len__()}"
+        return msg
+
+
 classes_map = {
     0: 'background',
     1: 'aeroplane',
