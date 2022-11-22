@@ -1,0 +1,127 @@
+{
+    "hooks":{
+        "hooks": [
+            {
+                "type": "CheckpointSaveHook",
+                "settings": {
+                    "path": "$LOGGING_PATH",
+                    "by_epoch": false,
+                    "interval": 1000,
+                    "best_metric_name": "mIoU",
+                    "max_ckpts": 1,
+                    "del_ckpt": true
+                }
+            },{
+                "type": "CheckpointLoadHook",
+                "settings": {
+                    "path": "$CKPT_PATH",
+                    "net_only": false
+                }
+            },{
+                "type": "RestoreCkptHook",
+                "settings": {
+                    "path": "$LOGGING_PATH"
+                }
+            },{
+                "type": "TqdmLoggerHook",
+                "settings": {
+                    "by_epoch": false,
+                    "train_log_interval": 10,
+                    "bar_total_color": "#7adecc",
+                    "bar_iter_color": "#61c2fa",
+                    "bar_val_ctrl_seq": "93",
+                    "bar_train_ctrl_seq": "96"
+                }
+            },{
+                "type": "TBLoggerHook",
+                "settings": {
+                    "path": "$LOGGING_PATH",
+                    "log_interval": 10
+                }
+            },{
+                "type": "MetricHook",
+                "settings": {
+                    "interval": 1,
+                    "metric_keys": ["Overall_Acc", "mClass_Acc", "mPred_Acc", "mIoU"],
+                    "best_metric_name": "mIoU"
+                }
+            },{
+                "name": "OptimizerHook",
+                "type": "$OPTIM"
+            },{
+                "type": "SchedulerHook"
+            },{
+                "type": "PolyLRInitHook"
+            },{
+                "type": "CustomModelHook"
+            }
+        ],
+
+        "stages": {
+            "before_run": [
+                "CheckpointLoadHook.load_ckpt",
+                "PolyLRInitHook.init_polylr",
+                "TqdmLoggerHook.init_bar_total",
+                "CustomModelHook.before_run"
+            ],
+            "after_run": [
+                "CustomModelHook.after_run"
+            ],
+
+            
+            "before_train": [
+                "TqdmLoggerHook.init_bar_iter_train"
+            ],
+            "after_train": [],
+            "before_train_epoch": [],
+            "after_train_epoch": [],
+            "before_train_iter": [
+                "CustomModelHook.before_train_iter"
+            ],
+            "after_train_iter": [
+                "OptimizerHook.backward",
+                "SchedulerHook.step",
+                "CustomModelHook.after_train_iter",
+                "MetricHook.get_lr",
+                "MetricHook.get_train_metric",
+                "TqdmLoggerHook.log_train",
+                "TqdmLoggerHook.update_bar_iter",
+                "TqdmLoggerHook.update_bar_total",
+                "TBLoggerHook.log_train",
+                "CheckpointSaveHook.save_ckpt"
+            ],
+
+
+            "before_val": [
+                "TqdmLoggerHook.init_bar_iter_val",
+                "MetricHook.reset_metric",
+                "CustomModelHook.before_val"
+            ],
+            "after_val": [
+                "MetricHook.get_val_metric",
+                "TqdmLoggerHook.log_val",
+                "TBLoggerHook.log_val",
+                "CheckpointSaveHook.save_best_model"
+            ],
+            "before_val_iter": [],
+            "after_val_iter": [
+                "TqdmLoggerHook.update_bar_iter"
+            ],
+
+
+            "before_test": [
+                "RestoreCkptHook.load_ckpt",
+                "TqdmLoggerHook.init_bar_iter_test"
+            ],
+            "after_test": [
+                "MetricHook.get_test_metric",
+                "TqdmLoggerHook.log_test",
+                "TBLoggerHook.log_test"
+            ],
+            "before_test_iter": [],
+            "after_test_iter": [
+                "TqdmLoggerHook.update_bar_iter"
+            ]
+        }
+    }
+}

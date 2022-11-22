@@ -1,0 +1,27 @@
+{
+    "runner": {
+        "type": "IterRunner",
+        "settings": {
+            "max_iter": 40000,
+            "workflow": {
+                "train": 2000,
+                "val": -1
+            }
+        },
+        "optimizer": {
+            "type": "SGD",
+            "settings": {
+                "lr": 1e-2,
+                "momentum": 0.9,
+                "weight_decay": 1e-4
+            }
+        },
+        "scheduler": {
+            "type": "poly",
+            "settings": {
+                "lr_power": 0.9,
+                "min_lr": 1e-5
+            }
+        }
+    }
+}

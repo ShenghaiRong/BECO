@@ -1,0 +1,21 @@
+{
+    "networks": [{
+        "type": "resnet",
+        "name": "main",
+        "optimizer": null,
+		"freeze": null,
+        "backbone": {
+			"type": "resnet",
+			"pretrain": "./data/model_zoo/resnetv1d101_mmcv.pth",
+			"settings": {
+				"variety": "resnet-D",
+				"depth": 101,
+				"out_indices": [4],
+				"output_stride": 16,
+				"contract_dilation": false,
+				"multi_grid": false,
+				"norm_layer": "$NORM_OP"
+			}
+		}
+    }]
+}

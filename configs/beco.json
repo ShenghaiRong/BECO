@@ -1,0 +1,131 @@
+{
+	"_base_": [
+		"configs/deeplab/deeplabv3plus_st.json",
+		"configs/base/hook/run_default.json"
+	],
+
+
+	"model": {
+        "type": "BECO",
+        "settings": {
+			"ignore_bg": true,
+			"mix_aug": true,
+			"mix_prob": 0.5,
+			"bdry_size": 1,
+			"bdry_whb": 0.2,
+			"bdry_whi": 0.2,
+			"bdry_wlb": 0,
+			"bdry_wli": 0,
+			"warm_up": 1,
+			"highres_t": 0.95,
+			"save_logits": true,
+			"test_msc": false
+		}
+    },
+
+	"datasets": {
+		"type": "voc_pseu_mask",
+		
+		"settings": {
+            "root": "./data/VOC2012"
+		},
+
+		"indvidual_settings": {
+			"train": {
+				"mode": "train",
+				"is_aug": true,
+				"transforms": "train",
+				"mask_dir": "./data/irn_pseudo_label",
+                "pseumask_dir": "./data/irn_mask"
+			},
+			"val": {
+				"mode": "val",
+				"transforms": "val"
+			},
+			"test": {
+				"mode": "val",
+				"transforms": "val"
+			}
+		},
+
+		"transforms":{
+			"train": [
+				{
+					"type": "RandomResizedCropMask",
+					"settings": {
+						"size": [512, 512],
+						"scale": [0.5, 0.75, 1, 1.5, 1.75, 2.0]
+					}
+				},{
+					"type": "RandomHorizontalFlipMask"
+				},{
+					"type": "ToTensorMask"
+				},{
+					"type": "NormalizeMask",
+					"settings": {
+						"mean": [0.485, 0.456, 0.406],
+						"std": [0.229, 0.224, 0.225]
+					}
+				}
+			],
+			"val": [
+				{
+					"type": "Resize",
+					"settings": {
+						"size": [512, 512]
+					}
+				},{
+					"type": "ToTensor"
+				},{
+					"type": "Normalize",
+					"settings": {
+						"mean": [0.485, 0.456, 0.406],
+						"std": [0.229, 0.224, 0.225]
+					}
+				}
+			]
+		},
+		
+		"dataloaders": {
+			"batch_size": 4,
+			"num_workers": 1,
+			"drop_last": true
+		}
+	},
+
+
+	"runner": {
+        "type": "EpochRunner",
+        "settings": {
+            "max_epoch": 80,
+            "workflow": {
+                "train": 1,
+                "val": 1
+            }
+        },
+        "optimizer": {
+            "type": "SGD",
+            "settings": {
+                "lr": 0.01,
+                "momentum": 0.9,
+                "weight_decay": 1e-4
+            }
+        },
+        "scheduler": {
+            "type": "poly",
+            "settings": {
+                "lr_power": 0.9,
+                "min_lr": 1e-5
+            }
+        }
+    },
+
+
+
+	"misc": {
+		"seed": 3223,
+		"notes": "",
+		"config_include_keys": [
+		]
+	}
+}
