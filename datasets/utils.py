@@ -22,7 +22,7 @@ class LabelCounter:
         self.class_num = class_num
         self.mode = mode
         self.device = get_device()
-        self.counter = torch.zeros(class_num, dtype=torch.int, device=device)
+        self.counter = torch.zeros(class_num, dtype=torch.int, device=self.device)
 
     def update(self, label: Tensor):
         amount = torch.zeros(self.class_num, dtype=torch.int, device=self.device)
