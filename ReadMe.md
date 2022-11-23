@@ -1,5 +1,5 @@
 # BECO
-This is implementation for the reviewed paper: Boundary-enhanced Co-training for Weakly Supervised Semantic Segmentation, paper ID: 5681.
+This is the implementation for the reviewed paper: Boundary-enhanced Co-training for Weakly Supervised Semantic Segmentation, paper ID: 5681.
 
 ## Prerequisite
 * Python 3.8, PyTorch 1.11.0, and more in requirements.txt
@@ -15,8 +15,8 @@ $ pip install -r requirements.txt
 #### Download PASCAL VOC 2012 devkit
 * Download Pascal VOC2012 dataset from the [official dataset homepage](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/).
 
-#### Download Imagenet pretrained model of DeeplabV3+
-* Download Imagenet pretrained model of DeeplabV3+ from [mmclassification](https://github.com/open-mmlab/mmclassification) [model](https://download.openmmlab.com/mmclassification/v0/resnet/resnetv1d101_b32x8_imagenet_20210531-6e13bcd3.pth).
+#### Download ImageNet pretrained model of DeeplabV3+
+* Download ImageNet pretrained [model](https://download.openmmlab.com/mmclassification/v0/resnet/resnetv1d101_b32x8_imagenet_20210531-6e13bcd3.pth) of DeeplabV3+ from [mmclassification](https://github.com/open-mmlab/mmclassification) .
 * And rename the downloaded pth as "resnetv1d101_mmcv.pth"
 
 #### Generate pseudo-labels and confidence masks
