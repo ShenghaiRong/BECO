@@ -6,12 +6,10 @@ from utils.crf import DenseCRF
 import PIL.Image as Image
 import torch.nn.functional as F
 import joblib
-from utils.metrics import SimSegMetrics
 import torch
 import numpy as np
 import os
 from utils.distributed import get_device
-from utils.visual.simseg import vis_label
 
 
 
@@ -121,7 +119,6 @@ def main():
         if postprocessor is not None:
             prob = postprocessor(image, prob)
         label = np.argmax(prob, axis=0)
-        #vis_label(label, image_id, output_dir=vis_dir)
         label_img = Image.fromarray(np.uint8(label))
         label_img.save(os.path.join(test_pred_dir, image_id+'.png'))
 
