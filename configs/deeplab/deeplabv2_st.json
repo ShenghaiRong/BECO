@@ -10,7 +10,7 @@
 			"settings": {
 				"variety": "resnet-B",
 				"depth": 101,
-				"out_indices": [1, 4],
+				"out_indices": [4],
 				"output_stride": 8,
 				"contract_dilation": false,
 				"multi_grid": false,
@@ -42,7 +42,7 @@
 			"settings": {
 				"variety": "resnet-B",
 				"depth": 101,
-				"out_indices": [1, 4],
+				"out_indices": [4],
 				"output_stride": 8,
 				"contract_dilation": false,
 				"multi_grid": false,
