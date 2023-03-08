@@ -72,6 +72,9 @@ $ CUDA_VISIBLE_DEVICES=0 python main.py -dist --logging_tag beco1 --amp
 ```bash
 $ CUDA_VISIBLE_DEVICES=0 python main.py --test --logging_tag beco1 --ckpt best_ckpt.pth
 ```
+
+Please refer to [pydensecrf](https://github.com/lucasb-eyer/pydensecrf) to install CRF python library for using testing with the CRF post-processing.
+
 ```bash
 $ python test.py --crf --logits_dir ./data/logging/beco1/logits --mode "val"
 ```
@@ -80,7 +83,7 @@ $ python test.py --crf --logits_dir ./data/logging/beco1/logits --mode "val"
 
 <img src = "https://github.com/ShenghaiRong/BECO-5681/blob/main/figures/results.png" width="100%" height="100%">
 
-|Method| Dataset | Weights| mIoU(w/o CRF)|
+|Method| Dataset | Weights| mIoU (w/o CRF)|
 |----|------|-------|-----|
 |BECO| VOC2012 | [[Google Drive]](https://drive.google.com/file/d/1CzlsfRZz94r2GonErDkgdUph4JgqSbSD/view?usp=sharing) / [[Baidu Drive]](https://pan.baidu.com/s/1cVTXqnE4LisIBOLDMSITqA?pwd=a3g4) | 70.9|
 |BECO| COCO2014 | [[Google Drive]](https://drive.google.com/file/d/1JqZQ50lMUOJA7Ts5g5eiu4ogakg3KuHG/view?usp=sharing) / [[Baidu Drive]](https://pan.baidu.com/s/1fSp3vpspjUuIYcSVOa_RyQ?pwd=on7s) | 45.6|
