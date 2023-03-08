@@ -95,7 +95,8 @@ class BaseRunner(metaclass=ABCMeta):
         self.logger.write("Start testing...")
 
         #self.call_hook('before_test')
-        self._hook_dict['RestoreCkptHook'].load_ckpt(self)
+        #self._hook_dict['RestoreCkptHook'].load_ckpt(self)
+        self._hook_dict['CheckpointLoadHook'].load_ckpt(self)
         if self._hook_dict['TqdmLoggerHook'] is not None:
             self._hook_dict['TqdmLoggerHook'].init_bar_iter_test(self)
 
