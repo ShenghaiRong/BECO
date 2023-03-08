@@ -73,7 +73,7 @@ $ CUDA_VISIBLE_DEVICES=0 python main.py -dist --logging_tag beco1 --amp
 $ CUDA_VISIBLE_DEVICES=0 python main.py --test --logging_tag beco1 --ckpt best_ckpt.pth
 ```
 
-Please refer to [pydensecrf](https://github.com/lucasb-eyer/pydensecrf) to install CRF python library for using testing with the CRF post-processing.
+Please refer to [pydensecrf](https://github.com/lucasb-eyer/pydensecrf) to install CRF python library for testing with the CRF post-processing.
 
 ```bash
 $ python test.py --crf --logits_dir ./data/logging/beco1/logits --mode "val"
