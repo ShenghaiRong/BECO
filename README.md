@@ -1,5 +1,8 @@
-# BECO
-This is the implementation for the reviewed paper: Boundary-enhanced Co-training for Weakly Supervised Semantic Segmentation, paper ID: 5681.
+# BECO - Official Pytorch Implementation
+**Boundary-enhanced Co-training for Weakly Supervised Semantic Segmentation (CVPR 2023)**
+Shenghai Rong, Bohai Tu, Zilei Wang, Junjie Li
+
+<img src = "https://github.com/ShenghaiRong/BECO-5681/blob/main/figures/framework.png" width="100%" height="100%">
 
 ## Prerequisite
 * Python 3.8, PyTorch 1.11.0, and more in requirements.txt
@@ -22,6 +25,7 @@ $ pip install -r requirements.txt
 #### Generate pseudo-labels and confidence masks
 * Pleaase refer to ./first-stage/irn/README.md for details.
 * After generating pseudo-labels and confidence masks, please rename their directories as "irn_pseudo_label" and "irn_mask" respectively.
+* The generated irn_pseudo_label and irn_mask are also provided here for reproducing our method more directly. [Google Drive](https://drive.google.com/file/d/1zVCZPhJYiOA3TN3dK4cJhzYHKWPUGdEi/view?usp=sharing) / [Baidu Drive](https://pan.baidu.com/s/1szP45tRTx_4sZkk-uRF8XQ?pwd=zb21)
 
 #### Prepare the data directory
 ```bash
@@ -54,19 +58,27 @@ data/
 
 ### Train
 ```bash
-$ CUDA_VISIBLE_DEVICES=0,1 python main.py -dist --logging_tag beco --run_id 1
+$ CUDA_VISIBLE_DEVICES=0,1 python main.py -dist --logging_tag beco1
 ```
 This code also supports AMP acceleration to reduce the GPU memory cost in half. Note that the "batch_size" in main.py refers to the batch_size of per GPU. So you should modify it when using different numbers of GPUs to keep the total batch_size of 16.
 ```bash
-$ CUDA_VISIBLE_DEVICES=0 python main.py -dist --logging_tag beco --run_id 1 --amp
+$ CUDA_VISIBLE_DEVICES=0 python main.py -dist --logging_tag beco1 --amp
 ```
 
 
 ### Test
 ```bash
-$ CUDA_VISIBLE_DEVICES=0 python main.py --test --logging_tag beco1
+$ CUDA_VISIBLE_DEVICES=0 python main.py --test --logging_tag beco1 --ckpt best_ckpt.pth
 ```
 ```bash
 $ python test.py --crf --logits_dir ./data/logging/beco1/logits --mode "val"
 ```
+
+## Main Results
+
+<img src = "https://github.com/ShenghaiRong/BECO-5681/blob/main/figures/results.png" width="100%" height="100%">
+
+|Method| Dataset | Weights| mIoU|
+|BECO| VOC2012 | [Google Drive](https://drive.google.com/file/d/1CzlsfRZz94r2GonErDkgdUph4JgqSbSD/view?usp=sharing) / [Baidu Drive](https://pan.baidu.com/s/1cVTXqnE4LisIBOLDMSITqA?pwd=a3g4) | 70.9|
+|BECO| COCO2014 | [Google Drive](https://drive.google.com/file/d/1JqZQ50lMUOJA7Ts5g5eiu4ogakg3KuHG/view?usp=sharing) / [Baidu Drive](https://pan.baidu.com/s/1fSp3vpspjUuIYcSVOa_RyQ?pwd=on7s) | 45.6|
 
