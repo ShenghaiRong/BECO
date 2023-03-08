@@ -25,7 +25,7 @@ $ pip install -r requirements.txt
 #### Generate pseudo-labels and confidence masks
 * Pleaase refer to ./first-stage/irn/README.md for details.
 * After generating pseudo-labels and confidence masks, please rename their directories as "irn_pseudo_label" and "irn_mask" respectively.
-* The generated irn_pseudo_label and irn_mask are also provided here for reproducing our method more directly. [Google Drive](https://drive.google.com/file/d/1zVCZPhJYiOA3TN3dK4cJhzYHKWPUGdEi/view?usp=sharing) / [Baidu Drive](https://pan.baidu.com/s/1szP45tRTx_4sZkk-uRF8XQ?pwd=zb21)
+* The generated irn_pseudo_label and irn_mask are also provided here for reproducing our method more directly. [[Google Drive]](https://drive.google.com/file/d/1zVCZPhJYiOA3TN3dK4cJhzYHKWPUGdEi/view?usp=sharing) / [[Baidu Drive]](https://pan.baidu.com/s/1szP45tRTx_4sZkk-uRF8XQ?pwd=zb21)
 
 #### Prepare the data directory
 ```bash
@@ -79,6 +79,7 @@ $ python test.py --crf --logits_dir ./data/logging/beco1/logits --mode "val"
 <img src = "https://github.com/ShenghaiRong/BECO-5681/blob/main/figures/results.png" width="100%" height="100%">
 
 |Method| Dataset | Weights| mIoU|
-|BECO| VOC2012 | [Google Drive](https://drive.google.com/file/d/1CzlsfRZz94r2GonErDkgdUph4JgqSbSD/view?usp=sharing) / [Baidu Drive](https://pan.baidu.com/s/1cVTXqnE4LisIBOLDMSITqA?pwd=a3g4) | 70.9|
-|BECO| COCO2014 | [Google Drive](https://drive.google.com/file/d/1JqZQ50lMUOJA7Ts5g5eiu4ogakg3KuHG/view?usp=sharing) / [Baidu Drive](https://pan.baidu.com/s/1fSp3vpspjUuIYcSVOa_RyQ?pwd=on7s) | 45.6|
+|----|------|-------|-----|
+|BECO| VOC2012 | [[Google Drive]](https://drive.google.com/file/d/1CzlsfRZz94r2GonErDkgdUph4JgqSbSD/view?usp=sharing) / [[Baidu Drive]](https://pan.baidu.com/s/1cVTXqnE4LisIBOLDMSITqA?pwd=a3g4) | 70.9|
+|BECO| COCO2014 | [[Google Drive]](https://drive.google.com/file/d/1JqZQ50lMUOJA7Ts5g5eiu4ogakg3KuHG/view?usp=sharing) / [[Baidu Drive]](https://pan.baidu.com/s/1fSp3vpspjUuIYcSVOa_RyQ?pwd=on7s) | 45.6|
 
