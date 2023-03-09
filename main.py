@@ -165,7 +165,7 @@ def main_worker(gpu, args: Dict[str, Any]):
 
     dataloader_dict, sampler_dict = get_dataloaders(
         config={
-			"batch_size": 8, #per GPU
+			"batch_size": 4, #per GPU, total batch_size is 16
 			"num_workers": 1,
 			"drop_last": True
 		},

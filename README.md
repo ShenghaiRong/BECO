@@ -60,11 +60,11 @@ data/
 
 ### Train
 ```bash
-$ CUDA_VISIBLE_DEVICES=0,1 python main.py -dist --logging_tag beco1
+$ CUDA_VISIBLE_DEVICES=0,1,2,3 python main.py -dist --logging_tag beco1
 ```
 This code also supports AMP acceleration to reduce the GPU memory cost in half. Note that the "batch_size" in main.py refers to the batch_size of per GPU. So you should modify it when using different numbers of GPUs to keep the total batch_size of 16.
 ```bash
-$ CUDA_VISIBLE_DEVICES=0 python main.py -dist --logging_tag beco1 --amp
+$ CUDA_VISIBLE_DEVICES=0,1 python main.py -dist --logging_tag beco1 --amp
 ```
 
 
