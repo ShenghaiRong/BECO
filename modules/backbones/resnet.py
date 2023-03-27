@@ -5,6 +5,7 @@ from typing import Dict, Type, Callable, Union, List, Optional, Tuple
 
 import torch
 import torch.nn as nn
+from collections import OrderedDict
 
 from utils.modules import init_weight
 
@@ -377,6 +378,7 @@ def get_convnet(
     
     if pretrain:
         state_dict = torch.load(pretrain, map_location='cpu')
+        state_dict = rename_mmcv_state_dict_keys(state_dict)
         # Remove last FC layer
         if 'fc.weight' in state_dict.keys():
             del state_dict['fc.weight'], state_dict['fc.bias']
@@ -384,4 +386,36 @@ def get_convnet(
         del state_dict
 
     return convnet
+
+
+def rename_mmcv_state_dict_keys(source_state_dict):
+    source_state_dict = source_state_dict['state_dict']
+    new_state_dict = OrderedDict()
+    for k, v in source_state_dict.items():
+        # Remove 'num_batches_tracked'
+        if 'num_batches_tracked' in k:
+            continue
+
+        if 'backbone' in k:
+            # Remove 'backbone.'
+            k = k[9:]
+            # Process stem layer
+            if 'layer' not in k:
+                if 'stem' in k:
+                    num = str(int(k[5]) + 1)
+                    if 'conv' in k:
+                        k = k[7:11] + num + k[11:]
+                    elif 'bn' in k:
+                        k = k[7:9] + num + k[9:]
+                k = 'stem_layer.' + k
+
+            new_state_dict[k] = v
+        # another case in mmcv ckpt
+        elif 'head' in k:
+            k = k[5:]
+            new_state_dict[k] = v
+        else:
+            print(f"warning: {k} not processed")
+    return new_state_dict
+    
 
