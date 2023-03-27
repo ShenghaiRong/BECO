@@ -25,7 +25,7 @@ $ pip install -r requirements.txt
 * And rename the downloaded pth as "resnetv1d101_mmcv.pth"
 
 #### Generate pseudo-labels and confidence masks
-* Pleaase refer to ./first-stage/irn/README.md for details.
+* Please refer to ./first-stage/irn/README.md for details.
 * After generating pseudo-labels and confidence masks, please rename their directories as "irn_pseudo_label" and "irn_mask" respectively.
 * The generated irn_pseudo_label and irn_mask are also provided here for reproducing our method more directly. [[Google Drive]](https://drive.google.com/file/d/1zVCZPhJYiOA3TN3dK4cJhzYHKWPUGdEi/view?usp=sharing) / [[Baidu Drive]](https://pan.baidu.com/s/1szP45tRTx_4sZkk-uRF8XQ?pwd=zb21)
 
