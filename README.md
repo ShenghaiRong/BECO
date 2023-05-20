@@ -4,6 +4,13 @@
 
 Shenghai Rong, Bohai Tu, Zilei Wang, Junjie Li
 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/boundary-enhanced-co-training-for-weakly/weakly-supervised-semantic-segmentation-on-4)](https://paperswithcode.com/sota/weakly-supervised-semantic-segmentation-on-4?p=boundary-enhanced-co-training-for-weakly)
+
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/boundary-enhanced-co-training-for-weakly/weakly-supervised-semantic-segmentation-on)](https://paperswithcode.com/sota/weakly-supervised-semantic-segmentation-on?p=boundary-enhanced-co-training-for-weakly)
+
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/boundary-enhanced-co-training-for-weakly/weakly-supervised-semantic-segmentation-on-1)](https://paperswithcode.com/sota/weakly-supervised-semantic-segmentation-on-1?p=boundary-enhanced-co-training-for-weakly)
+
+
 <img src = "https://github.com/ShenghaiRong/BECO-5681/blob/main/figures/framework.png" width="100%" height="100%">
 
 ## Prerequisite
