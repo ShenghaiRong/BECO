@@ -1,5 +1,5 @@
 # BECO - Official Pytorch Implementation
-**Boundary-enhanced Co-training for Weakly Supervised Semantic Segmentation (To appear in CVPR 2023)**
+**[Boundary-enhanced Co-training for Weakly Supervised Semantic Segmentation](https://openaccess.thecvf.com/content/CVPR2023/papers/Rong_Boundary-Enhanced_Co-Training_for_Weakly_Supervised_Semantic_Segmentation_CVPR_2023_paper.pdf) (CVPR 2023)**
 
 
 Shenghai Rong, Bohai Tu, Zilei Wang, Junjie Li
