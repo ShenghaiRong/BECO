@@ -97,3 +97,16 @@ $ python test.py --crf --logits_dir ./data/logging/beco1/logits --mode "val"
 |BECO| VOC2012 | ResNet101 | [[Google Drive]](https://drive.google.com/file/d/1CzlsfRZz94r2GonErDkgdUph4JgqSbSD/view?usp=sharing) / [[Baidu Drive]](https://pan.baidu.com/s/1cVTXqnE4LisIBOLDMSITqA?pwd=a3g4) | 70.9|
 |BECO| COCO2014| ResNet101| [[Google Drive]](https://drive.google.com/file/d/1JqZQ50lMUOJA7Ts5g5eiu4ogakg3KuHG/view?usp=sharing) / [[Baidu Drive]](https://pan.baidu.com/s/1fSp3vpspjUuIYcSVOa_RyQ?pwd=on7s) | 45.6|
 
+
+## Citation
+If you find our work inspiring or use our codebase in your research, please consider giving a star ⭐ and a citation.
+```
+@InProceedings{Rong_2023_CVPR,
+    author    = {Rong, Shenghai and Tu, Bohai and Wang, Zilei and Li, Junjie},
+    title     = {Boundary-Enhanced Co-Training for Weakly Supervised Semantic Segmentation},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2023},
+    pages     = {19574-19584}
+}
+```
