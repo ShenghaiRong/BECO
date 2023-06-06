@@ -33,6 +33,10 @@ $ pip install -r requirements.txt
 * Download ImageNet pretrained [model](https://download.openmmlab.com/mmclassification/v0/resnet/resnetv1d101_b32x8_imagenet_20210531-6e13bcd3.pth) of DeeplabV3+ from [mmclassification](https://github.com/open-mmlab/mmclassification) .
 * And rename the downloaded pth as "resnetv1d101_mmcv.pth"
 
+#### Download ImageNet pretrained model of DeeplabV2 (Optional)
+* Download ImageNet pretrained [model](https://download.pytorch.org/models/resnet101-cd907fc2.pth) of DeeplabV2 from [pytorch](https://pytorch.org/) .
+* And rename the downloaded pth as "resnet-101_v2.pth"
+
 #### Generate pseudo-labels and confidence masks
 * Please refer to ./first-stage/irn/README.md for details.
 * After generating pseudo-labels and confidence masks, please rename their directories as "irn_pseudo_label" and "irn_mask" respectively.
