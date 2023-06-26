@@ -32,6 +32,7 @@ class BECO(BaseSimSeg):
         save_logits,
         test_msc,
         logging_path,
+        coco_set,
         config,
         nets_dict) -> None:
         super().__init__(config, nets_dict)
@@ -49,6 +50,7 @@ class BECO(BaseSimSeg):
         self.T = highres_t
         self.save_logits = save_logits
         self.test_msc = test_msc
+        self.coco_set = coco_set
         self.scales = [0.5, 0.75, 1.0, 1.25, 1.5]
         if self.save_logits:
             self.logging_path = logging_path
@@ -186,8 +188,18 @@ class BECO(BaseSimSeg):
     def val_step(self, batch: Dict[str, Any]) -> None:
         images, labels = batch['img'], batch['target']
         images, labels = self.scatter((images, labels))
-        output = self.forward_cat(images)
-        self.update_metric_val(output["logits"], labels)  
+        if self.coco_set:
+            output = self.forward_cat_test(images)
+            img_names = batch['name']
+            B = images.size(0)
+            for i in range(B):
+                img_name = img_names[i]
+                logit_dir = os.path.join(self.logits_path, img_name+'.npy')
+                np.save(logit_dir, output["pre_logits"][i].cpu().numpy())
+            #self.update_metric_val(output["logits"], labels)  
+        else:
+            output = self.forward_cat(images)
+            self.update_metric_val(output["logits"], labels)  
 
     def forward(self, images: Tensor):
         out1 = self.nets['network1'](images)

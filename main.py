@@ -250,7 +250,8 @@ def main_worker(gpu, args: Dict[str, Any]):
 			"warm_up": 1,
 			"highres_t": 0.95,
 			"save_logits": True,
-			"test_msc": False
+			"test_msc": False,
+            "coco_set": False
         }
     model = BECO(
         **beco_config,
