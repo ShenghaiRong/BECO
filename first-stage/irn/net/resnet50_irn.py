@@ -223,7 +223,8 @@ class EdgeDisplacement(Net):
     def forward(self, x):
         feat_size = (x.size(2)-1)//self.stride+1, (x.size(3)-1)//self.stride+1
 
-        x = F.pad(x, [0, self.crop_size-x.size(3), 0, self.crop_size-x.size(2)])
+        #x = F.pad(x, [0, self.crop_size-x.size(3), 0, self.crop_size-x.size(2)])
+
         edge_out, dp_out = super().forward(x)
         edge_out = edge_out[..., :feat_size[0], :feat_size[1]]
         dp_out = dp_out[..., :feat_size[0], :feat_size[1]]
