@@ -6,6 +6,8 @@ from torch import nn
 from torch.nn import functional as F
 
 import modules
+from modules.backbones.mit import get_mit
+from modules.decoders.segformer_head import SegFormerHead
 from modules.convs import DepthwiseSeparableConv
 from utils.modules import init_weight
 
@@ -34,8 +36,8 @@ class Segformer(nn.Module):
         self.align_corners = decoder.settings.align_corners
         BN_op = getattr(nn, decoder.settings.norm_layer)
         channels = decoder.settings.channels
-        self.backbone = modules.backbones.get_backbone(backbone)
-        self.decoder = modules.decoders.get_decoder(decoder)
+        self.backbone = get_mit(backbone)
+        self.decoder = SegFormerHead(decoder)
         #self.projector = nn.Sequential( 
         #    nn.Conv2d(
         #        decoder.settings.lowlevel_in_channels,
