@@ -57,7 +57,8 @@ class TBLoggerHook(BaseHook):
         metrics_dict = runner.buffer.get('val_metric')
 
         # log val metrics
-        self.writer.add_scalars(self.tag_table['val'], metrics_dict, step)
+        if metrics_dict['Best'] is not None:
+            self.writer.add_scalars(self.tag_table['val'], metrics_dict, step)
 
     def log_test(self, runner):
         metrics_dict = runner.buffer.get('test_metric')
